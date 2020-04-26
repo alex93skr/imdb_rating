@@ -39,18 +39,26 @@ td {
 <body>
 
 <div align="center">
-<h1><a href="/">IMDB rating table</a></h1>
+
+	<div style="display: inline-block; text-align: center">
+		<h1><a href="/">IMDB rating table</a></h1>
 
 
-<form action="" method="get">
-   <p>
-   <input placeholder="imdb id: tt0944947" name="id" size="20">
-   <input type="submit" value="Делать">
-   </p>
-</form>
+		<form action="" method="get">
+		   <p>
+		   <input placeholder="imdb id: tt0944947" name="id" size="20">
+		   <input type="submit" value="Делать">
+		   </p>
+		</form>
+	<div
+
 
 {%- if TABLE %}
+
+	<div style="display: inline-block">
+
 	{%- if err != None %}
+		
 
 		<center><h>Ой, {{ err }} !</h><br><br>
 
@@ -58,26 +66,25 @@ td {
 
 		<center><h><a href="https://www.imdb.com/title/{{ worker.id }}/" target="_blank">{{ worker.title }}</a></h><br><br>
 
-		<div>
 		<table border="1" cellpadding="0" cellspacing="0" align="center">
-
 		{{ worker.table|safe }}
-
 		</table>
-		<div>
-
+		
 		<p>Сформировано за: {{ worker.search_time }} сек.</p>
-	{%- endif %}
 
+	{%- endif %}
+	
+	</div>
+	
 {%- else %}
 	
 	<div style="display: inline-block; text-align:left">
-		<p><b>Как пользоваться:</b></p>
-		<li>заходите на <a href="https://imdb.com" target="_blank">imdb.com</a></li>
-		<li>находите необходимый сериал</li>
-		<li>копируете URL целиком - <b>https://www.imdb.com/title/tt0944947/</b></li>
-		<li>или ID - <b>tt0944947</b></li>
-		<li>вставляете сами знаете куда &#9757;&#65039;</li>
+			<p><b>Как пользоваться:</b></p>
+			<li>заходите на <a href="https://imdb.com" target="_blank">imdb.com</a></li>
+			<li>находите необходимый сериал</li>
+			<li>копируете URL целиком - <b>https://www.imdb.com/title/tt0944947/</b></li>
+			<li>или ID - <b>tt0944947</b></li>
+			<li>вставляете сами знаете куда &#9757;&#65039;</li>
 	</div>
 
 {%- endif %}
