@@ -2,6 +2,7 @@
 #############################################################
 
 import os
+import re
 import statistics
 import time
 import threading
@@ -224,11 +225,12 @@ def index():
     if (id is None) or (id == ''):
         return render_template('imdb.html', appdata=appdata)
 
-    elif (len(id) > 10) or (id[:2] != 'tt'):
+    id = re.search(r'tt\d{6,11}', id)
+    if not id:
         err_text = 'что-то не то пишете...'
         return render_template('imdb.html', TABLE=True, err=err_text, appdata=appdata)
-
     else:
+        id = id.group(0)
         if id in appdata.previous_requests:
             worker = appdata.previous_requests[id]
         else:
