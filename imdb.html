@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="data:;base64,=">
+<meta charset="UTF-8">
+<title>IMDB rating table</title>
+
+
+<style type="text/css">
+
+body {
+	background-color: #F5F5F5;
+}
+
+.black_bg {
+	font-weight: bold;
+	color: white;
+	background-color: black;
+}
+
+table {
+	border: 1px solid black;
+}
+
+td {
+	border-left: 1px solid black;
+	border-top: 1px solid black;
+}
+
+td {
+	width: 40px;
+	height: 22px;
+	text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div align="center">
+<h1><a href="/">IMDB rating table</a></h1>
+
+
+<form action="" method="get">
+   <p>
+   <input placeholder="imdb id: tt0944947" name="id" size="20">
+   <input type="submit" value="Делать">
+   </p>
+</form>
+
+{%- if TABLE %}
+	{%- if err != None %}
+
+		<center><h>Ой, {{ err }} !</h><br><br>
+
+	{%- else %}
+
+		<center><h><a href="https://www.imdb.com/title/{{ worker.id }}/" target="_blank">{{ worker.title }}</a></h><br><br>
+
+		<div>
+		<table border="1" cellpadding="0" cellspacing="0" align="center">
+
+		{{ worker.table|safe }}
+
+		</table>
+		<div>
+
+		<p>Сформировано за: {{ worker.search_time }} сек.</p>
+	{%- endif %}
+
+{%- endif %}
+
+
+{%- if appdata.previous_requests != {} %}
+	
+	<p>&nbsp;</p>
+
+	<div style="display: inline-block; text-align:left">
+	{%- for id in appdata.reverse_list %}
+		<p>{{ id }} &mdash; <a href="/?id={{ id }}">{{ appdata.previous_requests[id].title }}</a></p>
+	{%- endfor %}
+	</div>
+
+{%- endif %}
+
+<p>&nbsp;</p>
+<p align="center" style="font-size: 12px;">&#169; 2020 <a href="https://t.me/alex93skr" target="_blank">@skr</a></p>
+
+</div>
+
+</body>
+</html>
