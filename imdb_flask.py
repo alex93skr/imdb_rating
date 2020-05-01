@@ -166,29 +166,33 @@ class Worker:
         min_series = 0 if self.zero else 1
         max_series = max([len(self.data[i]) for i in self.data])
 
-        rowspan = max_series + 2 if self.zero else max_series + 1
-        colspan = max_season + 2 if self.zero else max_season + 1
+        # print(max_series)
+        # print(self.zero)
 
-        # HTML
+        rowspan = max_series + 1 if self.zero else max_series
 
-        # шапка
+        # HTML NEW
+
+        # сезоны
         self.update_safe_html('<tr>')
-        self.update_safe_html(f'<td class="black_bg" rowspan="{rowspan}">с<br>е<br>р<br>и<br>и</td>')
-        self.update_safe_html(f'<td class="black_bg" colspan="{colspan}">с е з о н ы</td>')
+        self.update_safe_html(f'<td class="black_bg" colspan="2">&nbsp;</td>')
+        self.update_safe_html(f'<td class="black_bg" colspan="{max_season}">с е з о н ы</td>')
         self.update_safe_html('</tr>')
 
-        # п/п
+        # сезоны п/п
         self.update_safe_html('<tr>')
-        self.update_safe_html('<td class="black_bg">&nbsp;</td>')
+        self.update_safe_html(f'<td class="black_bg" colspan="2">&nbsp;</td>')
         for season in range(1, max_season + 1):
             self.update_safe_html(f'<td class="black_bg">{season}</td>')
         self.update_safe_html('</tr>')
 
-        # значения
-        for series in range(min_series, max_series):
+        # серии
+        for series in range(min_series, max_series + 1):
             self.update_safe_html('<tr>')
             for season in range(max_season + 1):
                 if season == 0:
+                    if series == min_series:
+                        self.update_safe_html(f'<td class="black_bg" rowspan="{rowspan}">с<br>е<br>р<br>и<br>и</td>')
                     self.update_safe_html(f'<td class="black_bg">{series}</td>')
                 else:
                     try:
@@ -198,10 +202,10 @@ class Worker:
                         self.update_safe_html(f'<td>&nbsp;</td>')
             self.update_safe_html('</tr>')
 
-        # пустые
+        # подвал скип
         self.update_safe_html('<tr>')
-        self.update_safe_html('<td class="black_bg" colspan="2">&nbsp;</td>')
-        self.update_safe_html(f'<td colspan="{max_season + 2}">&nbsp;</td>')
+        self.update_safe_html(f'<td class="black_bg" colspan="2">&nbsp;</td>')
+        self.update_safe_html(f'<td colspan="{max_season}">&nbsp;</td>')
         self.update_safe_html('</tr>')
 
         # средний
