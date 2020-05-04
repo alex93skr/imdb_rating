@@ -9,7 +9,7 @@ import threading
 import requests
 import bs4
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from jinja2 import Template
 from fake_headers import Headers
 
