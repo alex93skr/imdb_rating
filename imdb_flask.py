@@ -220,9 +220,13 @@ class Worker:
 
 #############################################################
 
+@app.route('/')
+def hello():
+    return redirect("https://nextrue.ru/imdb", code=301)
 
-@app.route('/', methods=['GET'])
-def index():
+
+@app.route('/q', methods=['GET'])
+def index1():
     id = request.args.get('id')
     # print(id)
 
