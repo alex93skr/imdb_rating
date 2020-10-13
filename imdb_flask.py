@@ -220,9 +220,9 @@ class Worker:
 
 #############################################################
 
-@app.route('/qqqqqqqq')
-def hello1():
-    return redirect("https://nextrue.ru/imdb", code=301)
+#@app.route('/qqqqqqqq')
+#def hello1():
+#    return redirect("https://nextrue.ru/imdb", code=301)
 
 
 @app.route('/', methods=['GET'])
