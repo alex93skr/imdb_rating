@@ -1,5 +1,5 @@
 Flask==1.1.1
-Jinja2==2.10.3
+Jinja2==2.11.3
 fake_headers==1.0.2
 requests==2.23.0
 beautifulsoup4==4.9.0
