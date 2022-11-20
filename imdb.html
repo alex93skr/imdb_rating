@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>imdb rating</title>
+    <script>
+      function addIMG() {
+        let span = document.getElementById('waitImgHere');
+        let wait_img = document.createElement('img');
+        wait_img.setAttribute("src", "/static/wait.gif");
+        wait_img.setAttribute("id", "wait_img");
+        span.appendChild(wait_img);
+      }
+    </script>
+    <style type="text/css">
+      .black_bg {
+      color: white;
+      background-color: #404040;
+      }
+      table {
+      border-width: 1px;
+      border-collapse: collapse;
+      border-style: solid;
+      border-color: #404040;
+      }
+      td {
+      width: 40px;
+      height: 22px;
+      text-align: center;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <!-- хедер -->
+      <div class="row py-2">
+        <div class="col text-center">
+          <p>
+            <a href="/">
+          <h1>Рейтинг сериалов</h1></a></p>
+          <p class="lead">Генератор таблиц на основе данных с IMDB</p>
+        </div>
+      </div>
+      <!-- поиск гифка -->
+      <div class="row py-2">
+        <div class="col text-center">
+          <form action="" method="get">
+            <p>
+              <input placeholder="imdb URL or ID: tt0944947" name="id" size="20">
+              <input type="submit" value="Делать" onclick="addIMG()">
+            </p>
+          </form>
+        </div>
+      </div>
+      <p class="text-center"><span id="waitImgHere"></span></p>
+      <!-- таблица -->
+      {%- if err != None %}
+      <p class="text-center">Ой, {{ err }} !</p>
+      {%- else %}
+      {%- if worker %}
+      <div class="row py-2">
+        <div class="col text-center">
+          <div>
+            <p><a href="https://www.imdb.com/title/{{ worker.id }}/" target="_blank">{{ worker.title }}</a></p>
+            <table border="1" cellpadding="0" cellspacing="0" align="center">
+              {{ worker.table|safe }}
+            </table>
+            <p>&nbsp;</p>
+            <p>Сформировано за: {{ worker.search_time }} сек.</p>
+          </div>
+        </div>
+      </div>
+      {%- endif %}
+      {%- endif %}
+      <!-- Как пользоваться -->
+      <div class="row py-2 justify-content-md-center">
+        <div class="col-md-auto">
+          <ul>
+            <p><b>Как пользоваться:</b></p>
+            <li>заходите на <a href="https://imdb.com" target="_blank">imdb.com</a></li>
+            <li>находите необходимый сериал</li>
+            <li>копируете URL целиком - <b>https://www.imdb.com/title/tt0944947/</b></li>
+            <li>или ID - <b>tt0944947</b></li>
+            <li>вставляете сами знаете куда &#9757;&#65039;</li>
+          </ul>
+        </div>
+      </div>
+      <!-- аппдата -->
+      {%- if appdata.previous_requests != {} %}
+      <div class="row py-2 justify-content-md-center">
+        <div class="col-md-auto text-left">
+          {%- for id in appdata.reverse_list %}
+          <p>{{ id }} &mdash; <a href="?id={{ id }}">{{ appdata.previous_requests[id].title }}</a></p>
+          {%- endfor %}
+        </div>
+      </div>
+      {%- endif %}
+      <!-- подвал -->
+      <div class="row py-2 ">
+        <div class="col text-center">
+          <p>&#169; {{ appdata.year }} <a href="https://t.me/alex93skr" target="_blank">skr</a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
