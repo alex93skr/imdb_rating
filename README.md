@@ -1,3 +1,3 @@
 # IMDB rating table generator
 
-[https://imdbrating.herokuapp.com/](https://imdbrating.herokuapp.com/ "https://imdbrating.herokuapp.com/")
+[https://imdb.nextrue.ru/](https://imdb.nextrue.ru/ "https://imdb.nextrue.ru/")
