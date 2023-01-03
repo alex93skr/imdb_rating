@@ -1,7 +1,7 @@
 import re
 from pprint import pprint
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 
 from utils import Appdata
 from worker import Worker
@@ -51,6 +51,11 @@ def index():
             if worker.err is None:
                 appdata.add({id: worker})
         return render_template('imdb.html', appdata=appdata, worker=worker, err=worker.err)
+
+
+@app.route('/robots.txt')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 
 @app.route('/debug', methods=['GET'])
